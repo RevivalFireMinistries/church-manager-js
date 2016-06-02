@@ -1,0 +1,27 @@
+{
+  "name": "church-manager-js",
+  "version": "1.0.0",
+  "description": "JS version of church-manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RevivalFireMinistries/church-manager-js.git"
+  },
+  "keywords": [
+    "church-manager"
+  ],
+  "author": "Russel Mupfumira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RevivalFireMinistries/church-manager-js/issues"
+  },
+  "homepage": "https://github.com/RevivalFireMinistries/church-manager-js#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "mysql": "^2.10.2"
+  }
+}
