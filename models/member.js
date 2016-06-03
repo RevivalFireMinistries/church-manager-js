@@ -1,0 +1,67 @@
+var connection = require('../connection');
+
+
+function Member() {
+    this.getAll = function(res) {
+        connection.acquire(function(err, con) {
+            if (err) throw err;
+            con.query('select * from rfm_member', function(err, result) {
+                con.release();
+                res.send(result);
+            });
+        });
+    };
+
+    this.getById = function(id,res) {
+        connection.acquire(function(err, con) {
+            if (err) throw err;
+            con.query('select * from rfm_member where id = ?', [id], function(err, result) {
+                con.release();
+                res.send(result);
+            });
+        });
+    };
+
+    this.create = function(member, res) {
+        connection.acquire(function(err, con) {
+            if (err) throw err;
+            con.query('insert into rfm_member set ?', member, function(err, result) {
+                con.release();
+                if (err) {
+                    res.send({status: 1, message: 'TODO creation failed'});
+                } else {
+                    res.send({status: 0, message: 'TODO created successfully'});
+                }
+            });
+        });
+    };
+
+    this.update = function(member, res) {
+        connection.acquire(function(err, con) {
+            if (err) throw err;
+            con.query('update rfm_member set ? where id = ?', [member, member.id], function(err, result) {
+                con.release();
+                if (err) {
+                    res.send({status: 1, message: 'Member update failed'});
+                } else {
+                    res.send({status: 0, message: 'Member updated successfully'});
+                }
+            });
+        });
+    };
+
+    this.delete = function(id, res) {
+        connection.acquire(function(err, con) {
+            if (err) throw err;
+            con.query('delete from rfm_member where id = ?', [id], function(err, result) {
+                con.release();
+                if (err) {
+                    res.send({status: 1, message: 'Failed to delete'});
+                } else {
+                    res.send({status: 0, message: 'Deleted successfully'});
+                }
+            });
+        });
+    };
+}
+module.exports = new Member();
