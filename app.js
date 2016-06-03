@@ -1,24 +1,52 @@
 var express = require('express');
-var bodyparser = require('body-parser');
-var fs = require('fs');
-var connection = require('./connection');
+var connection = require('./db/connection');
+log4js = require('log4js');
+log4js.configure( "./config/log4js.json" );
+logger = log4js.getLogger("app");
+
+var app = module.exports = express.createServer();
+
+// Check node_env, if not set default to development
+var env = (process.env.NODE_ENV || "development");
+var config = require('./config/config')[env];
+
+var _ = require('underscore');
+var cors = require('cors');
 
 
-var app = express();
-app.use(bodyparser.urlencoded({extended: true}));
-app.use(bodyparser.json());
-
-// dynamically include routes (Controller)
-fs.readdirSync('./controllers').forEach(function (file) {
-    if(file.substr(-3) == '.js') {
-        route = require('./controllers/' + file);
-        route.controller(app);
-    }
+// Configuration, defaults to jade as the view engine
+app.configure(function(){
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(cors({origin: '*'}));
+  app.use(app.router);
+  app.use(express.static(__dirname + '/public'));
 });
 
 connection.init();
-routes.configure(app);
 
-var server = app.listen(8000, function() {
-    console.log('Church Manager listening on port ' + server.address().port);
+/*
+ * This section is for environment specific configuration
+ */
+app.configure('development', function(){
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
+
+app.configure('production', function(){
+    app.use(express.errorHandler());
+    logger = log4js.getLogger("file-appender");
+});
+
+
+
+app.listen(config.EnvConfig.port, function(){
+  logger.debug("Church Manager server listening on port %d in %s mode", app.address().port, app.settings.env);
+});
+
+
+/*
+ * Exports the express app for other modules to use
+ * all route matches go the routes.js file
+ */
+module.exports.app = app;
+routes = require('./routes');

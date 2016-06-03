@@ -1,11 +1,12 @@
-var connection = require('../connection');
+var connection = require('./../db/connection');
 
 
 function Member() {
-    this.getAll = function(res) {
+    this.getAssemblyMembers = function(id,res) {
+        logger.debug("the id : "+id);
         connection.acquire(function(err, con) {
             if (err) throw err;
-            con.query('select * from rfm_member', function(err, result) {
+            con.query('select * from rfm_member where assembly = ?',[id], function(err, result) {
                 con.release();
                 res.send(result);
             });
@@ -28,9 +29,9 @@ function Member() {
             con.query('insert into rfm_member set ?', member, function(err, result) {
                 con.release();
                 if (err) {
-                    res.send({status: 1, message: 'TODO creation failed'});
+                    res.send({status: 1, message: 'Member creation failed'});
                 } else {
-                    res.send({status: 0, message: 'TODO created successfully'});
+                    res.send({status: 0, message: 'Member created successfully'});
                 }
             });
         });
