@@ -10,7 +10,7 @@ var app = module.exports = express.createServer();
 var env = (process.env.NODE_ENV || "development");
 var config = require('./config/config')[env];
 
-var _ = require('underscore');
+ _ = require('underscore');
 var cors = require('cors');
 
 
