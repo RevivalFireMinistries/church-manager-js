@@ -6,7 +6,7 @@ function Member() {
         logger.debug("the id : "+id);
         connection.acquire(function(err, con) {
             if (err) throw err;
-            con.query('select * from rfm_member where assembly = ?',[id], function(err, result) {
+            con.query('select * from rfm_member where assembly = ? ',[id], function(err, result) {
                 con.release();
                 res.send(result);
             });
@@ -46,6 +46,21 @@ function Member() {
                     res.send({status: 1, message: 'Member update failed'});
                 } else {
                     res.send({status: 0, message: 'Member updated successfully'});
+                }
+            });
+        });
+    };
+
+
+    this.softDelete = function(id, res) {
+        connection.acquire(function(err, con) {
+            if (err) throw err;
+            con.query('update rfm_member set status = ? where id = ?', ["Deleted", id], function(err, result) {
+                con.release();
+                if (err) {
+                    res.send({status: 1, message: 'Member delete failed'});
+                } else {
+                    res.send({status: 0, message: 'Member deleted successfully'});
                 }
             });
         });

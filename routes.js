@@ -28,6 +28,7 @@ app.put('/assemblies/:id', authCtrl.authenticate);
 app.get('/assemblies/:id/members', memberController.getAssemblyMembers);
 app.post('/assemblies/:id/member', memberController.create);
 app.put('/assemblies/:id/member/:id', memberController.update);
+app.delete('/assemblies/:id/member/:memberid', memberController.delete);
 
 
 // admin routes

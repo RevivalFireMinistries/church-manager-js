@@ -16,3 +16,8 @@ exports.update = function(req,res){
     var m = req.body;
     member.update(m,res);
 }
+
+exports.delete = function(req,res){ //this is a soft delete
+    logger.info("now deleting member")
+    member.softDelete(req.params.memberid,res);
+}
