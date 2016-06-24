@@ -1,7 +1,7 @@
 /* put controller actions here */
 
 exports.index = function(req, res){
-    res.send([{name:'name1'}, {name:'name2'}, {name:'name3'}]);
+    res.send("Ndeipi!");
 };
 
 exports.detail = function(req, res){

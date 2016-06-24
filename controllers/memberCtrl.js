@@ -8,6 +8,8 @@ exports.getAssemblyMembers = function(req, res){
 exports.create = function(req,res){
     var m = req.body;
     m.assembly = parseInt(req.params.id);
+    m.datecreated = new Date();
+    m.status = "Active";
     member.create(m,res);
 }
 

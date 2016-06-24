@@ -9,7 +9,7 @@ var siteController = require('./controllers/site');
 var adminController = require('./controllers/admin');
 var memberController = require('./controllers/memberCtrl');
 var authCtrl = require('./controllers/authenticationCtrl');
-var assemblyController = require('./controllers/assemblyCtrl');
+var titheController = require('./controllers/tithesCtrl');
 
 /* Put routes here */
 
@@ -29,7 +29,8 @@ app.get('/assemblies/:id/members', memberController.getAssemblyMembers);
 app.post('/assemblies/:id/member', memberController.create);
 app.put('/assemblies/:id/member/:id', memberController.update);
 app.delete('/assemblies/:id/member/:memberid', memberController.delete);
-
+//Tithes
+app.post('/member/:id/tithe',titheController.create);
 
 // admin routes
 app.get('/admin', adminController.admin);
