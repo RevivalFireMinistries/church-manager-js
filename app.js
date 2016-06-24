@@ -1,5 +1,6 @@
 var express = require('express');
 var connection = require('./db/connection');
+q = require('q');
 log4js = require('log4js');
 log4js.configure( "./config/log4js.json" );
 logger = log4js.getLogger("app");
@@ -12,6 +13,7 @@ var config = require('./config/config')[env];
 
  _ = require('underscore');
 var cors = require('cors');
+var rfm = require('./utils/Utils');
 
 
 // Configuration, defaults to jade as the view engine

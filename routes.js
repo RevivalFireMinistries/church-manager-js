@@ -9,13 +9,14 @@ var siteController = require('./controllers/site');
 var adminController = require('./controllers/admin');
 var memberController = require('./controllers/memberCtrl');
 var authCtrl = require('./controllers/authenticationCtrl');
+var assemblyController = require('./controllers/assemblyCtrl');
+var eventsController = require('./controllers/eventCtrl');
 var titheController = require('./controllers/tithesCtrl');
 
 /* Put routes here */
 
 // main site routes
 app.get('/', siteController.index);
-app.get('/detail', siteController.detail);
 //Auth
 app.post('/auth/login', authCtrl.authenticate);
 
@@ -31,6 +32,10 @@ app.put('/assemblies/:id/member/:id', memberController.update);
 app.delete('/assemblies/:id/member/:memberid', memberController.delete);
 //Tithes
 app.post('/member/:id/tithe',titheController.create);
+//Events
+app.get('/event/:id',eventsController.getEvent);
+app.post('/assemblies/:id/event',eventsController.create);
+
 
 // admin routes
 app.get('/admin', adminController.admin);
