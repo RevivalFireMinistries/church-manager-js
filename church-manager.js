@@ -42,7 +42,7 @@ app.configure('production', function(){
 
 
 app.listen(config.EnvConfig.port, function(){
-  logger.debug("Church Manager server listening on port %d in %s mode", app.address().port, app.settings.env);
+  logger.info("Church Manager server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
 
 
