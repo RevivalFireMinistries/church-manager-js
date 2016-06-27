@@ -20,7 +20,7 @@ module.exports = {
             pass: '::db password::'
             },
         EnvConfig: {
-            port: 80
+            port: 3140
             }
         }
     };
