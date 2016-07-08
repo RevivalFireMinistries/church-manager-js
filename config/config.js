@@ -8,7 +8,7 @@ module.exports = {
             pass: '::db password::'
             },
         EnvConfig: {
-            port: 8000
+            port: 3140
             }
         },
     production: {
