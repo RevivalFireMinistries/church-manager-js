@@ -10,3 +10,4 @@ generateRandomString = function()
 
     return text;
 }
+

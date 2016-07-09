@@ -5,6 +5,7 @@ log4js = require('log4js');
 log4js.configure( "./config/log4js.json" );
 logger = log4js.getLogger("app");
 
+
 var app = module.exports = express.createServer();
 
 // Check node_env, if not set default to development

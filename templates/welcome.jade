@@ -1,0 +1,11 @@
+
+h1
+  | Maintainer:
+  = ' ' + maintainer.name
+table(style={background: 'black'})
+  tr(style={color: 'red', background: 'grey'})
+    td Twitter
+    td= maintainer.twitter
+  tr(style={color: 'red', background: 'white'})
+    td Blog
+    td= maintainer.blog
