@@ -14,7 +14,8 @@ var config = require('./config/config')[env];
 
  _ = require('underscore');
 var cors = require('cors');
-var rfm = require('./utils/Utils');
+ rfm = require('./utils/Utils');
+ email = require('./notifications/email-engine');
 
 
 // Configuration, defaults to jade as the view engine
