@@ -13,7 +13,7 @@ function Event() {
                     res.send({status: 1, message: 'Event creation failed'});
                 } else {
                     res.send({status: 0, message: 'Event created successfully'});
-                    email.send();
+                    email.sendEventEmail(event);
                 }
             });
         });

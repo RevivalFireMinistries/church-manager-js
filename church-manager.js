@@ -1,4 +1,5 @@
 var express = require('express');
+var moment = require('moment');
 var connection = require('./db/connection');
 q = require('q');
 log4js = require('log4js');
@@ -14,8 +15,9 @@ var config = require('./config/config')[env];
 
  _ = require('underscore');
 var cors = require('cors');
- rfm = require('./utils/Utils');
+ util = require('./utils/Utils');
  email = require('./notifications/email-engine');
+ sms = require('./notifications/sms-engine');
 
 
 // Configuration, defaults to jade as the view engine

@@ -23,6 +23,17 @@ function Member() {
         });
     };
 
+
+    this.getByAssembly = function(assemblyId,callback) {
+        connection.acquire(function(err, con) {
+            if (err) throw err;
+            con.query('select * from rfm_user where assembly = ?', [assemblyId], function(err, result) {
+                con.release();
+                callback(result);
+            });
+        });
+    };
+
     this.create = function(user, res) {
         connection.acquire(function(err, con) {
             if (err) throw err;
