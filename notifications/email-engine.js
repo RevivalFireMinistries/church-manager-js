@@ -1,4 +1,5 @@
 var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
 var _jade = require('jade');
 var fs = require('fs');
 var user = require('./../models/user');
@@ -8,13 +9,10 @@ var user = require('./../models/user');
 module.exports = {
     sendEventEmail: function (evt) {
         // Create a SMTP transport object
-        var transport = nodemailer.createTransport("SMTP", {
-            service: 'Gmail',
-            auth: {
-                user: "esavvy@rfm.org.za",
-                pass: "kingdom85"
-            }
-        });
+
+        var transport = nodemailer.createTransport(
+            smtpTransport('smtps://esavvy%40rfm.org.za:kingdom85@smtp.rfm.org.za')
+        );
 
         logger.debug('SMTP Configured');
         var template = process.cwd() + '/templates/event_report.jade';
@@ -49,7 +47,7 @@ module.exports = {
                     htmlString = compiledTmpl(event);
 
                     // Message object
-                    var message = {
+                    var mailOptions = {
 
                         // sender info
                         from: 'Fire Manager <esavvy@rfm.org.za>',
@@ -68,7 +66,7 @@ module.exports = {
                     };
 
                     logger.debug('Sending Mail');
-                    transport.sendMail(message, function(error){
+                    transport.sendMail(mailOptions, function(error){
                         if(error){
                             logger.info('Error occured');
                             logger.info(error.message);
