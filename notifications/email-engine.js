@@ -22,7 +22,7 @@ module.exports = {
         fs.readFile(template,evt, 'utf8', function(err, file) {
             if (err) {
                 //handle errors
-                logger.debug('ERROR!');
+                logger.info('ERROR!');
                 return null;
             }
             else {
@@ -70,11 +70,11 @@ module.exports = {
                     logger.debug('Sending Mail');
                     transport.sendMail(message, function(error){
                         if(error){
-                            console.log('Error occured');
-                            console.log(error.message);
+                            logger.info('Error occured');
+                            logger.info(error.message);
                             return;
                         }
-                        logger.debug('Message sent successfully!');
+                        logger.info('Message sent successfully!');
 
                         // if you don't want to use this transport object anymore, uncomment following line
                         transport.close(); // close the connection pool

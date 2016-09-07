@@ -6,10 +6,12 @@
     "accounting": "^0.4.1",
     "body-parser": "^1.15.1",
     "cors": "^2.7.1",
-    "express": "2.5.8",
+    "express": "^2.5.8",
+    "jade": "^1.11.0",
     "log4js": "^0.6.36",
     "moment": "^2.14.1",
     "mysql": "^2.10.2",
+    "nodemailer": "^2.6.0",
     "q": "^1.4.1",
     "underscore": "^1.8.3"
   },
