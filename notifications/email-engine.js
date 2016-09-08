@@ -1,4 +1,5 @@
 var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
 var _jade = require('jade');
 var fs = require('fs');
 var user = require('./../models/user');
@@ -8,16 +9,20 @@ var user = require('./../models/user');
 module.exports = {
     sendEventEmail: function (evt) {
         // Create a SMTP transport object
-        var transport = nodemailer.createTransport("SMTP", {
+
+
+        var transport = nodemailer.createTransport(smtpTransport ({
             service: 'Gmail',
-            tls: {
-                rejectUnauthorized: false
-            },
+            secureConnection: true,
             auth: {
                 user: "esavvy@rfm.org.za",
                 pass: "kingdom85"
-            }
-        });
+            },
+            tls: {
+                rejectUnauthorized: false
+            },
+        }));
+
 
         logger.debug('SMTP Configured');
         var template = process.cwd() + '/templates/event_report.jade';
