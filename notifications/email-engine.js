@@ -10,9 +10,19 @@ module.exports = {
     sendEventEmail: function (evt) {
         // Create a SMTP transport object
 
-        var transport = nodemailer.createTransport(
-            smtpTransport('smtps://esavvy%40rfm.org.za:kingdom85@smtp.rfm.org.za')
-        );
+
+        var transport = nodemailer.createTransport(smtpTransport ({
+            service: 'Gmail',
+            secureConnection: true,
+            auth: {
+                user: "esavvy@rfm.org.za",
+                pass: "kingdom85"
+            },
+            tls: {
+                rejectUnauthorized: false
+            },
+        }));
+
 
         logger.debug('SMTP Configured');
         var template = process.cwd() + '/templates/event_report.jade';
