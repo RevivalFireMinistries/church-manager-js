@@ -1,4 +1,5 @@
 var connection = require('./../db/connection');
+var member = require('./../models/member');
 
 
 function Tithe() {
@@ -10,9 +11,17 @@ function Tithe() {
                 con.release();
                 if (err) {
                     res.send({status: 1, message: 'Tithe creation failed'});
+                    logger.error("Error : "+err);
                 } else {
-                    res.send({status: 0, message: 'Tithe created successfully'});
-                }
+                    var m = member.getById(tithe.member,function(data){
+                        var m = data[0];
+                        tithe.name = m.firstName;
+                        sms.sendSMS(util.getTitheSMSText(tithe),m.phone,function(resp){
+                            logger.info(resp);
+                            res.send({status: 0, message: 'Tithe captured successfully'});
+                        });
+                    });
+                 }
             });
         });
     };

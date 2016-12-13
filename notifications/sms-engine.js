@@ -4,11 +4,7 @@ var util  = require('util');
 
 module.exports = {
     sendSMS: function (message,mobileNumber,callbackFunction) {
-        var options = {
-            host: 'http://www.winsms.co.za',
-            path: '/api/batchmessage.asp?User=luke@rfm.org.za&Password=password85&message='+
-            encodeURIComponent(message)+'&Numbers='+mobileNumber
-        };
+
         callback = function(response) {
             var str = '';
 
@@ -19,21 +15,13 @@ module.exports = {
 
             //the whole response has been recieved, so we just print it out here
             response.on('end', function () {
-                console.log(str);
                 callbackFunction(str);
             });
         }
 
-        http.request(options, callback).end();
-    },
-
-    sendMessage: function (message,mobileNumber) {
-        var url = 'http://www.winsms.co.za/api/batchmessage.asp?User=luke@rfm.org.za&Password=password85&message='+
-            encodeURIComponent(message)+'&Numbers='+mobileNumber;
-        fs.open(url, 'w', function(err, fd) {
-            for (var i = 0; i < 100; i++)
-                fs.write(fd, util.format('line %d\n', i));
-            fs.close(fd);
-        });
+        //http.get(options, callback).end();
+        var url = 'http://www.winsms.co.za/api/batchmessage.asp?User=luke@rfm.org.za&Password=password85&message='+ encodeURIComponent(message)+'&Numbers='+mobileNumber;
+        http.get(url, callback);
     }
+
 }

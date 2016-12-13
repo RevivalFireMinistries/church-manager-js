@@ -15,7 +15,7 @@ module.exports = {
             service: 'Gmail',
             secureConnection: true,
             auth: {
-                user: "esavvy@rfm.org.za",
+                user: "firemanager@rfm.org.za",
                 pass: "kingdom85"
             },
             tls: {

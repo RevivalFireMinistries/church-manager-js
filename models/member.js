@@ -46,6 +46,26 @@ function Member() {
                 res.send(error);
             });
     };
+    this.getById = function(id,callback) {
+        cq.connect()
+            .then(function(con){
+                var deferred = q.defer();
+                con.query('select * from rfm_member where id = ?',[id], function(err, rows, fields) {
+                    if (err) {
+                        console.log("Error: " + err);
+                        deferred.reject(err)
+                    }
+                    deferred.resolve(rows);
+                });
+                return deferred.promise;
+            })
+            .then(function(result){
+                callback(result);
+            })
+            .catch(function(error){
+                callback(null);
+            });
+    };
 
     this.create = function(member, res) {
         cq.connect()

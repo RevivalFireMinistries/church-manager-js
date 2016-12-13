@@ -10,6 +10,7 @@ function Event() {
             con.query('insert into rfm_event set ?', event, function(err, result) {
                 con.release();
                 if (err) {
+                    logger.error(err);
                     res.send({status: 1, message: 'Event creation failed'});
                 } else {
                     res.send({status: 0, message: 'Event created successfully'});
