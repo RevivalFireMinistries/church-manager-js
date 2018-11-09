@@ -16,7 +16,7 @@ module.exports = {
             secureConnection: true,
             auth: {
                 user: "firemanager@rfm.org.za",
-                pass: "kingdom85"
+                pass: "Kingdom@204"
             },
             tls: {
                 rejectUnauthorized: false
